@@ -1,18 +1,20 @@
+import ErroNotFound from '../pages/ErrorNotFound.vue';
+
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
-    ]
+    children: [            
+      { path: '/dashboard', component: () => import('pages/DashboardPage.vue'), meta: { requiresAuth: true }},
+      { path: '/users', component: () => import('pages/UsersPage.vue'), meta: { requiresAuth: true }},
+    ],    
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
+  { path: '/login', component: () => import('pages/LoginPage.vue') },
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
+    path: '/:catchAll(.*)',  
+    name: 'ErroNotFound',
+    component: ErroNotFound,
+  },
 ]
 
 export default routes

@@ -26,5 +26,17 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
+  Router.beforeEach((to, from, next) => {
+    const isAuthenticated = JSON.parse(localStorage.getItem('userSession')) !== null;
+
+    if (to.meta.requiresAuth && !isAuthenticated) {      
+      next('/login')
+    } else {
+      next()
+    }
+  })
+
   return Router
 })
+
+

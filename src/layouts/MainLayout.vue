@@ -1,102 +1,118 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout>
     <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+      <q-toolbar class="bg-primary text-white">
+        <q-btn flat icon="menu" v-if="isAuthenticated" @click="toggleDrawer" aria-label="Menu" />
+        <q-btn flat label="Dashboard" @click="$router.push('/dashboard')" v-if="isAuthenticated" />
+        <q-btn flat label="Usuários" @click="$router.push('/users')" v-if="isAuthenticated" />
+        <q-btn flat label="Sair" @click="logout" v-if="isAuthenticated" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+    <q-page-container>
+      <q-page v-if="isAuthenticated">
+        <router-view />
+      </q-page>
+      <q-page v-else>
+        
+      </q-page>
+    </q-page-container>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+    <q-drawer v-model="drawer" bordered>
+      <q-list>
+        <q-item clickable @click="$router.push('/dashboard')" v-if="isAuthenticated">
+          <q-item-section>Dashboard</q-item-section>
+        </q-item>
+        <q-item clickable @click="$router.push('/users')" v-if="isAuthenticated">
+          <q-item-section>Usuários</q-item-section>
+        </q-item>
+        <q-item clickable @click="logout" v-if="isAuthenticated">
+          <q-item-section>Sair</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
   </q-layout>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+<script>
+export default {
+  data() {
+    return {
+      drawer: false,
+    };
   },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
+    },
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    },
+    redirectToLogin() {
+      this.$router.push('/login');
+    },
   },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+  computed: {
+    userSession() {
+      return this.$store.state.userSession;
+    },
+    isAuthenticated() {
+      return this.userSession !== null;
+    },
   },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+  watch: {
+    isAuthenticated(newVal) {
+      if (!newVal) {
+        this.redirectToLogin();
+      }
+    },
   },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+  mounted() {
+    if (!this.isAuthenticated) {
+      this.redirectToLogin();
+    }
   },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+};
 </script>
+
+<style scoped>
+.q-header {
+  background-color: #00796b;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.q-toolbar {
+  padding: 0 20px;
+}
+
+.q-btn {
+  font-weight: bold;
+}
+
+.q-page-container {
+  background-color: #f4f4f4;
+}
+
+.q-drawer {
+  background-color: #ffffff;
+}
+
+.q-drawer .q-list {
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .q-header {
+    padding: 0 10px;
+  }
+
+  .q-btn {
+    font-size: 14px;
+  }
+
+  .q-toolbar {
+    justify-content: space-between;
+  }
+}
+</style>
