@@ -31,20 +31,28 @@ export default {
     };
   },
   methods: {
+    // Método assíncrono para realizar o login do usuário.
     async login() {
+      // Dispara a action 'login' na Vuex Store, passando os dados do formulário (email e senha).
       const success = await this.$store.dispatch('login', { email: this.email, password: this.password });
-
+      
+      // Verifica se o login foi bem-sucedido.
       if (success) {
+        // Redireciona o usuário autenticado para a página de dashboard.
         this.$router.push('/dashboard');
       } else {
+        // Exibe uma notificação negativa caso o login falhe (credenciais inválidas).
         this.$q.notify({
+          // Define o tipo de notificação como negativa.
           type: 'negative',
+          // Mensagem de erro exibida ao usuário.
           message: 'Email ou senha inválidos.',
         });
       }
     },
   },
   mounted() {
+    // Dispara a action 'fetchUsers' ao montar o componente para carregar a lista de usuários.
     this.$store.dispatch("fetchUsers");
   },
 };

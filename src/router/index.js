@@ -26,12 +26,17 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
 
+  // Adiciona um "guard" global antes de cada navegação
   Router.beforeEach((to, from, next) => {
+    // Verifica se há uma sessão do usuário armazenada no localStorage
     const isAuthenticated = JSON.parse(localStorage.getItem('userSession')) !== null;
 
+    // Se a rota atual exigir autenticação e o usuário não estiver autenticado,
+    // redireciona para a página de login.
     if (to.meta.requiresAuth && !isAuthenticated) {      
       next('/login')
     } else {
+      // Caso contrário, permite a navegação.
       next()
     }
   })

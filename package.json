@@ -2,7 +2,7 @@
   "name": "user-crud",
   "version": "0.0.1",
   "description": "An management for users",
-  "productName": "User Crud",
+  "productName": "Gerenciamento de Usuários",
   "author": "Luiz Guilherme <luizsett7@gmail.com>",
   "type": "module",
   "private": true,

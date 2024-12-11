@@ -77,8 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.q-header {
-  background-color: #00796b;
+.q-header {  
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
