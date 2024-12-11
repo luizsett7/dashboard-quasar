@@ -1,15 +1,15 @@
 <template>
   <q-page padding>
     <div class="q-gutter-md">
-      <q-btn label="Adicionar Usuário" color="primary" @click="openAddModal" class="full-width" />
+      <q-btn label="Adicionar Usuário" color="primary" @click="openAddModal" />
       <q-list bordered class="shadow-2 rounded bg-white">
         <q-item v-for="user in users" :key="user.id" clickable>
           <q-item-section>
-            <q-avatar icon="person" color="grey-5" text-color="white" />
+            <img :src="user.avatar" alt="Avatar" width="100" />
           </q-item-section>
           <q-item-section>
-            <div class="text-weight-medium">{{ user.first_name }} {{ user.last_name }}</div>
-            <div class="text-caption text-grey">{{ user.email }}</div>
+            <div class="text-weight-medium user-list-name">{{ user.first_name }} {{ user.last_name }}</div>
+            <div class="text-caption text-grey user-list-email">{{ user.email }}</div>
           </q-item-section>
           <q-item-section side>
             <q-btn icon="edit" flat @click="openEditModal(user)" color="primary" />
@@ -160,10 +160,16 @@ export default {
 }
 .q-item {
   display: flex;
-  align-items: center;
+  align-items: center;  
 }
 .q-item-section {
   padding: 0 0.5rem;
+}
+.user-list-name {
+  font-size: 1.2em;
+}
+.user-list-email {
+  font-size: 1em;
 }
 .modal-input{
   margin-top: 5px;
