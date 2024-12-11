@@ -64,8 +64,9 @@ Este projeto é um sistema de gerenciamento de usuários construído utilizando 
 
 ## **Uso**
 1. **Login**:
-   - Acesse https://reqres.in/api/users?page=1 e selecione um endereço de e-mail.
-   - Utilize a senha padrão: `123456`.
+   - Acesse https://reqres.in/api/users?page=1 e copie um endereço de e-mail.
+   - Navegue em https://dashboardquasar-fvpdkymzv-luizsett7s-projects.vercel.app   
+   - Utilize o e-mail copiado e a senha padrão: `123456`.
 2. **Navegação**:
    - Após o login, você será redirecionado para o dashboard.
    - Utilize o menu de navegação para acessar a lista de usuários, adicionar novos usuários, editar ou excluir usuários.
