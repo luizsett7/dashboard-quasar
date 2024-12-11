@@ -90,11 +90,11 @@ O código inclui comentários em áreas críticas para garantir clareza e facili
 
 ## **Capturas de Tela**
 - **Tela de Login**
-  ![Tela de Login](https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-login.png?raw=true)
+  (https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-login.png?raw=true)
 - **Dashboard**
-  ![Dashboard](https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-dashboard.png?raw=true)
+  (https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-dashboard.png?raw=true)
 - **Lista de Usuários**
-  ![Lista de Usuários](https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-users.png?raw=true)
+  (https://github.com/luizsett7/dashboard-quasar/blob/main/screenshot/screenshot-users.png?raw=true)
 
 ## **Melhorias Futuras**
 - Adicionar gerenciamento de sessão no lado do servidor.
